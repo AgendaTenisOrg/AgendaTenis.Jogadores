@@ -1,0 +1,29 @@
+CREATE DATABASE jogadores
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LOCALE_PROVIDER = 'libc'
+    CONNECTION LIMIT = -1
+    IS_TEMPLATE = False;
+
+
+CREATE SCHEMA jogadores
+    AUTHORIZATION postgres;
+
+
+CREATE TABLE jogadores."Jogador" (
+    "Id" INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    "UsuarioId" INT NOT NULL,
+    "Nome" VARCHAR(100) NOT NULL,
+    "Sobrenome" VARCHAR(100) NOT NULL,
+    "DataNascimento" TIMESTAMP NOT NULL,
+    "Telefone" VARCHAR(255) NOT NULL,
+    "Pais" VARCHAR(255) NOT NULL,
+    "Estado" VARCHAR(255) NOT NULL,
+    "Cidade" VARCHAR(255) NOT NULL,
+    "MaoDominante" VARCHAR(255) NOT NULL,
+    "Backhand" VARCHAR(255) NOT NULL,
+    "EstiloDeJogo" VARCHAR(255) NOT NULL,
+    "PontuacaoAtual" DOUBLE PRECISION NOT NULL,
+    "DataCriacao" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
