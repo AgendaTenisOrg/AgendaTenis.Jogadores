@@ -2,13 +2,17 @@ using AgendaTenis.Jogadores.Core.AcessoDados;
 using AgendaTenis.Jogadores.Core.Aplicacao.BuscarAdversarios;
 using AgendaTenis.Jogadores.Core.Aplicacao.CompletarPerfil;
 using AgendaTenis.Jogadores.Core.Aplicacao.ObterResumoJogador;
+using AgendaTenis.Jogadores.WebApi.ConfiguracaoDeServicos;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.AdicionarConfiguracaoSwagger();
+builder.Services.AdicionarAutenticacaoJWT(builder.Configuration);
+
 builder.Services.AddDbContext<JogadoresDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Jogadores"),
         b => b.MigrationsAssembly("AgendaTenis.Jogadores.WebApi")));
@@ -34,8 +38,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
-
 
 app.MapControllers();
 

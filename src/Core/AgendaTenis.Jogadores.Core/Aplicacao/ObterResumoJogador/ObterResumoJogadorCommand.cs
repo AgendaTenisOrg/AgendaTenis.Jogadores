@@ -1,8 +1,6 @@
-﻿using MediatR;
+﻿namespace AgendaTenis.Jogadores.Core.Aplicacao.ObterResumoJogador;
 
-namespace AgendaTenis.Jogadores.Core.Aplicacao.ObterResumoJogador;
-
-public class ObterResumoJogadorCommand : IRequest<ObterResumoJogadorResponse>
+public class ObterResumoJogadorCommand
 {
     public int UsuarioId { get; set; }
 }

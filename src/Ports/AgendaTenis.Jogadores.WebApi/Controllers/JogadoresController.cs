@@ -2,7 +2,6 @@
 using AgendaTenis.Jogadores.Core.Aplicacao.CompletarPerfil;
 using AgendaTenis.Jogadores.Core.Aplicacao.ObterResumoJogador;
 using AgendaTenis.Jogadores.Core.Enums;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,11 +12,10 @@ namespace AgendaTenis.Jogadores.WebApi.Controllers;
 public class JogadoresController : ControllerBase
 {
     [HttpPost("Perfil/Completar")]
-    //[Authorize]
+    [Authorize]
     public async Task<IActionResult> CompletarPerfil([FromServices] CompletarPerfilHandler handler, [FromBody] CompletarPerfilCommand request)
     {
-        //request.UsuarioId = int.Parse(User.Identity.Name);
-        request.UsuarioId = 1;
+        request.UsuarioId = int.Parse(User.Identity.Name);
         var response = await handler.Handle(request, new CancellationToken());
         return Ok(response);
     }
@@ -28,7 +26,7 @@ public class JogadoresController : ControllerBase
     {
         var request = new BuscarAdversariosCommand()
         {
-            UsuarioId = 0,
+            UsuarioId = int.Parse(User.Identity.Name),
             Pais = pais,
             Estado = estado,
             Cidade = cidade,
@@ -43,8 +41,7 @@ public class JogadoresController : ControllerBase
     //[Authorize]
     public async Task<IActionResult> ObterResumoJogador([FromServices] ObterResumoJogadorHandler handler)
     {
-        //var request = new ObterResumoJogadorCommand() { UsuarioId = int.Parse(User.Identity.Name) };
-        var request = new ObterResumoJogadorCommand() { UsuarioId = 1 };
+        var request = new ObterResumoJogadorCommand() { UsuarioId = int.Parse(User.Identity.Name) };
         var response = await handler.Handle(request, new CancellationToken());
         return Ok(response);
     }

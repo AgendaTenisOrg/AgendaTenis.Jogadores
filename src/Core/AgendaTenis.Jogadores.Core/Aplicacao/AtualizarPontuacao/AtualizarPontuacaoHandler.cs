@@ -1,11 +1,10 @@
 ﻿using AgendaTenis.Jogadores.Core.AcessoDados;
 using AgendaTenis.Jogadores.Core.Exceptions;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace AgendaTenis.Jogadores.Core.Aplicacao.AtualizarPontuacao;
 
-public class AtualizarPontuacaoHandler : IRequestHandler<AtualizarPontuacaoCommand>
+public class AtualizarPontuacaoHandler
 {
     private readonly JogadoresDbContext _jogadoresDbContext;
 

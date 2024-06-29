@@ -2,12 +2,11 @@
 using AgendaTenis.Jogadores.Core.Dominio;
 using AgendaTenis.Jogadores.Notificacoes;
 using AgendaTenis.Jogadores.Notificacoes.Enums;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace AgendaTenis.Jogadores.Core.Aplicacao.CompletarPerfil;
 
-public class CompletarPerfilHandler : IRequestHandler<CompletarPerfilCommand, CompletarPerfilResponse>
+public class CompletarPerfilHandler
 {
     private readonly JogadoresDbContext _jogadoresDbContext;
 

@@ -1,0 +1,48 @@
+version: '3.4'
+
+services:
+  agendatenis.jogadores.webapi:
+    image: ${DOCKER_REGISTRY-}agendatenisjogadoreswebapi
+    build:
+      context: .
+      dockerfile: src/Ports/AgendaTenis.Jogadores.WebApi/Dockerfile
+    depends_on:
+      - postgres
+      - redis
+
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: Matheus1234!
+    volumes:
+      - postgresqlvolume:/var/lib/postgresql/data
+    networks:
+      - agendatenis-network
+
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: matheus.campanini@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: Matheus1234!
+    networks:
+      - agendatenis-network
+
+
+  redis:
+    image: redis:7.2.5-alpine
+    hostname: teste-redis
+    networks:
+      - agendatenis-network
+
+
+
+networks:
+  agendatenis-network:
+    driver: bridge
+
+
+
+volumes:
+  postgresqlvolume:

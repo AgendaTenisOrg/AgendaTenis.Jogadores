@@ -1,11 +1,10 @@
 ﻿using AgendaTenis.Jogadores.Core.AcessoDados;
 using AgendaTenis.Jogadores.Core.Regras;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace AgendaTenis.Jogadores.Core.Aplicacao.BuscarAdversarios;
 
-public class BuscarAdversariosHandler : IRequestHandler<BuscarAdversariosCommand, BuscarAdversariosResponse>
+public class BuscarAdversariosHandler
 {
     private readonly JogadoresDbContext _jogadoresDbContext;
 

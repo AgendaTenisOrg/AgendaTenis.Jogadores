@@ -1,9 +1,8 @@
 ﻿using AgendaTenis.Jogadores.Core.Enums;
-using MediatR;
 
 namespace AgendaTenis.Jogadores.Core.Aplicacao.BuscarAdversarios;
 
-public class BuscarAdversariosCommand : IRequest<BuscarAdversariosResponse>
+public class BuscarAdversariosCommand 
 {
     public int? UsuarioId { get; set; }
     public string Pais { get; set; }

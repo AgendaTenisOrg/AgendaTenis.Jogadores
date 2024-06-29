@@ -1,9 +1,8 @@
-﻿using MediatR;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace AgendaTenis.Jogadores.Core.Aplicacao.CompletarPerfil;
 
-public class CompletarPerfilCommand : IRequest<CompletarPerfilResponse>
+public class CompletarPerfilCommand
 {
     [JsonIgnore]
     public int UsuarioId { get; set; }
