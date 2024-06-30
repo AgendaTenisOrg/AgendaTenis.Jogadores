@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AgendaTenis.Jogadores.Notif
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{2906E07F-DB0F-43CF-BBCE-E4953C7A60BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgendaTenis.Jogadores.WorkerService", "src\Ports\AgendaTenis.Jogadores.WorkerService\AgendaTenis.Jogadores.WorkerService.csproj", "{467BB529-5E33-4BC5-BD6D-C6ADF2DA5447}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{2906E07F-DB0F-43CF-BBCE-E4953C7A60BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2906E07F-DB0F-43CF-BBCE-E4953C7A60BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2906E07F-DB0F-43CF-BBCE-E4953C7A60BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{467BB529-5E33-4BC5-BD6D-C6ADF2DA5447}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{467BB529-5E33-4BC5-BD6D-C6ADF2DA5447}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{467BB529-5E33-4BC5-BD6D-C6ADF2DA5447}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{467BB529-5E33-4BC5-BD6D-C6ADF2DA5447}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +74,7 @@ Global
 		{23FB8AC0-5135-478D-A276-B5AE959C95A3} = {C4B0614B-BB1A-43EB-9DC9-19727711870A}
 		{7A7300E4-AF76-4274-ABD1-DA3E322D3285} = {E74C4B92-03F5-4AAA-96C8-E206088E9652}
 		{1E78E303-BE46-4016-8998-09B283800CB9} = {E74C4B92-03F5-4AAA-96C8-E206088E9652}
+		{467BB529-5E33-4BC5-BD6D-C6ADF2DA5447} = {C4B0614B-BB1A-43EB-9DC9-19727711870A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C854D660-77E6-45BB-891B-8A9103516C31}

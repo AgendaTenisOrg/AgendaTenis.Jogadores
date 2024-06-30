@@ -22,7 +22,8 @@ public class RabbitMessageBus : IMessageBus
             Port = int.Parse(_rabbitMQConfig.Port),
             UserName = _rabbitMQConfig.Username,
             Password = _rabbitMQConfig.Password,
-            ClientProvidedName = _rabbitMQConfig.CliendProvidedName
+            ClientProvidedName = _rabbitMQConfig.CliendProvidedName,
+            VirtualHost = _rabbitMQConfig.VirtualHost
         };
 
         return factory.CreateConnection();
