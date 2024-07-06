@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace AgendaTenis.Jogadores.WebApi.Migrations
+namespace AgendaTenis.Jogadores.Core.AcessoDados.Migrations
 {
     [DbContext(typeof(JogadoresDbContext))]
     partial class JogadoresDbContextModelSnapshot : ModelSnapshot
@@ -82,7 +82,7 @@ namespace AgendaTenis.Jogadores.WebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Jogador", (string)null);
+                    b.ToTable("Jogador", "jogadores");
                 });
 #pragma warning restore 612, 618
         }

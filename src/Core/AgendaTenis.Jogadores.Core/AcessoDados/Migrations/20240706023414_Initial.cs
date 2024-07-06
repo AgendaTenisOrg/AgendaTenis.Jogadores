@@ -4,16 +4,20 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace AgendaTenis.Jogadores.WebApi.Migrations
+namespace AgendaTenis.Jogadores.Core.AcessoDados.Migrations
 {
     /// <inheritdoc />
-    public partial class Teste : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "jogadores");
+
             migrationBuilder.CreateTable(
                 name: "Jogador",
+                schema: "jogadores",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -42,7 +46,8 @@ namespace AgendaTenis.Jogadores.WebApi.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Jogador");
+                name: "Jogador",
+                schema: "jogadores");
         }
     }
 }

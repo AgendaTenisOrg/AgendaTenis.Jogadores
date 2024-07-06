@@ -21,7 +21,7 @@ public class JogadoresController : ControllerBase
     }
 
     [HttpGet("Adversarios/Buscar")]
-    //[Authorize]
+    [Authorize]
     public async Task<IActionResult> BuscarAdversarios([FromServices] BuscarAdversariosHandler handler, string pais, string estado, string cidade, CategoriaEnum categoria)
     {
         var request = new BuscarAdversariosCommand()
@@ -38,7 +38,7 @@ public class JogadoresController : ControllerBase
     }
 
     [HttpGet("Resumo")]
-    //[Authorize]
+    [Authorize]
     public async Task<IActionResult> ObterResumoJogador([FromServices] ObterResumoJogadorHandler handler)
     {
         var request = new ObterResumoJogadorCommand() { UsuarioId = int.Parse(User.Identity.Name) };

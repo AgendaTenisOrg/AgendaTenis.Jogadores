@@ -9,11 +9,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace AgendaTenis.Jogadores.WebApi.Migrations
+namespace AgendaTenis.Jogadores.Core.AcessoDados.Migrations
 {
     [DbContext(typeof(JogadoresDbContext))]
-    [Migration("20240627013451_Teste")]
-    partial class Teste
+    [Migration("20240706023414_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,7 +85,7 @@ namespace AgendaTenis.Jogadores.WebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Jogador", (string)null);
+                    b.ToTable("Jogador", "jogadores");
                 });
 #pragma warning restore 612, 618
         }
