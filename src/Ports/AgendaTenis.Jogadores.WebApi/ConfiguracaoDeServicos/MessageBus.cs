@@ -1,5 +1,5 @@
-﻿using AgendaTenis.Jogadores.Infra.Eventos.Configuracao;
-using AgendaTenis.Jogadores.Infra.Eventos.Servicos;
+﻿using AgendaTenis.Eventos.Configuracao;
+using AgendaTenis.Eventos.Servicos;
 
 namespace AgendaTenis.Jogadores.WebApi.ConfiguracaoDeServicos;
 

@@ -1,4 +1,4 @@
-﻿using AgendaTenis.Jogadores.Notificacoes;
+﻿using AgendaTenis.Notificacoes.Core;
 
 namespace AgendaTenis.Jogadores.Core.Aplicacao.CompletarPerfil;
 

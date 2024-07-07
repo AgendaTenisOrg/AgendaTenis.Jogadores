@@ -1,13 +1,10 @@
+using AgendaTenis.Eventos.Configuracao;
+using AgendaTenis.Eventos.Servicos;
 using AgendaTenis.Jogadores.Core.AcessoDados;
 using AgendaTenis.Jogadores.Core.Aplicacao.AtualizarPontuacao;
 using AgendaTenis.Jogadores.Core.Eventos.Consumidores;
-using AgendaTenis.Jogadores.Infra.Eventos.Configuracao;
-using AgendaTenis.Jogadores.Infra.Eventos.Servicos;
 using AgendaTenis.Jogadores.WorkerService.Workers;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace AgendaTenis.Jogadores.WorkerService
 {

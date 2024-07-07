@@ -1,8 +1,8 @@
-﻿using AgendaTenis.Jogadores.Core.Aplicacao.AtualizarPontuacao;
-using AgendaTenis.Jogadores.Infra.Eventos.Base;
-using AgendaTenis.Jogadores.Infra.Eventos.Constantes;
-using AgendaTenis.Jogadores.Infra.Eventos.Mensagens;
-using AgendaTenis.Jogadores.Infra.Eventos.Servicos;
+﻿using AgendaTenis.Eventos.Base;
+using AgendaTenis.Eventos.Constantes;
+using AgendaTenis.Eventos.Mensagens;
+using AgendaTenis.Eventos.Servicos;
+using AgendaTenis.Jogadores.Core.Aplicacao.AtualizarPontuacao;
 using Microsoft.Extensions.DependencyInjection;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;

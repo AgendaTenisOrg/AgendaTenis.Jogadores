@@ -7,13 +7,10 @@
   </PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="AgendaTenis.Cache.Core" Version="1.0.0" />
+		<PackageReference Include="AgendaTenis.Eventos.Core" Version="1.0.0" />
+		<PackageReference Include="AgendaTenis.Notificacoes.Core" Version="1.0.1" />
 		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\..\Infra\AgendaTenis.Jogadores.Infra.Cache\AgendaTenis.Jogadores.Infra.Cache.csproj" />
-	  <ProjectReference Include="..\..\Infra\AgendaTenis.Jogadores.Infra.Eventos\AgendaTenis.Jogadores.Infra.Eventos.csproj" />
-	  <ProjectReference Include="..\..\Infra\AgendaTenis.Jogadores.Notificacoes\AgendaTenis.Jogadores.Notificacoes.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using AgendaTenis.Jogadores.Core.AcessoDados;
 using AgendaTenis.Jogadores.Core.Dominio;
-using AgendaTenis.Jogadores.Notificacoes;
-using AgendaTenis.Jogadores.Notificacoes.Enums;
+using AgendaTenis.Notificacoes.Core;
+using AgendaTenis.Notificacoes.Core.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace AgendaTenis.Jogadores.Core.Aplicacao.CompletarPerfil;
@@ -44,7 +44,7 @@ public class CompletarPerfilHandler
                 Sucesso = false,
                 Notificacoes = new List<Notificacao>()
                 {
-                    new AgendaTenis.Jogadores.Notificacoes.Notificacao()
+                    new Notificacao()
                     {
                         Mensagem = "Ocorreu um erro ao completar perfil do jogador",
                         Tipo = TipoNotificacaoEnum.Erro
@@ -63,7 +63,7 @@ public class CompletarPerfilHandler
         var usuarioComPerfilCompleto = await _jogadoresDbContext.Jogador.AsNoTracking().AnyAsync(c => c.UsuarioId == request.UsuarioId);
         if (usuarioComPerfilCompleto)
         {
-            validacoes.Add(new AgendaTenis.Jogadores.Notificacoes.Notificacao()
+            validacoes.Add(new Notificacao()
             {
                 Mensagem = "Usuário já está com perfil completo",
                 Tipo = TipoNotificacaoEnum.Aviso

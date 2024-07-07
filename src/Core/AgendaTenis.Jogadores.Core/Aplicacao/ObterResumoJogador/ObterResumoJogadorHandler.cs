@@ -1,6 +1,6 @@
-﻿using AgendaTenis.Jogadores.Core.AcessoDados;
+﻿using AgendaTenis.Cache.Core;
+using AgendaTenis.Jogadores.Core.AcessoDados;
 using AgendaTenis.Jogadores.Core.Regras;
-using AgendaTenis.Jogadores.Infra.Cache;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 
