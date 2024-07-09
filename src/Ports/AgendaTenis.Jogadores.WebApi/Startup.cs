@@ -44,8 +44,11 @@ public class Startup
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, JogadoresDbContext jogadoresDbContext)
     {
-        if (env.IsDevelopment())
+        if (env.IsDevelopment() || env.EnvironmentName == "Container")
         {
+            Console.WriteLine("Swagger habilitado");
+
+            // Em ambiente de desenvolvimento a aplicação já aplica as migrations para deixar o banco de dados pronto
             jogadoresDbContext.Database.Migrate();
             app.UseSwagger();
             app.UseSwaggerUI();

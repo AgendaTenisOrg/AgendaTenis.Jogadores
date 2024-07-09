@@ -1,5 +1,3 @@
-#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER app
 WORKDIR /app
@@ -9,10 +7,11 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["AgendaTenis.Jogadores.WebApi/AgendaTenis.Jogadores.WebApi.csproj", "AgendaTenis.Jogadores.WebApi/"]
-RUN dotnet restore "./AgendaTenis.Jogadores.WebApi/AgendaTenis.Jogadores.WebApi.csproj"
+COPY ["src/Ports/AgendaTenis.Jogadores.WebApi/AgendaTenis.Jogadores.WebApi.csproj", "src/Ports/AgendaTenis.Jogadores.WebApi/"]
+COPY ["src/Core/AgendaTenis.Jogadores.Core/AgendaTenis.Jogadores.Core.csproj", "src/Core/AgendaTenis.Jogadores.Core/"]
+RUN dotnet restore "./src/Ports/AgendaTenis.Jogadores.WebApi/AgendaTenis.Jogadores.WebApi.csproj"
 COPY . .
-WORKDIR "/src/AgendaTenis.Jogadores.WebApi"
+WORKDIR "/src/src/Ports/AgendaTenis.Jogadores.WebApi"
 RUN dotnet build "./AgendaTenis.Jogadores.WebApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
