@@ -10,9 +10,7 @@ public class JogadorEntity : Entity
         string sobrenome,
         DateTime dataNascimento,
         string telefone,
-        string pais,
-        string estado,
-        string cidade,
+        int idCidade,
         string maoDominante,
         string backhand,
         string estiloDeJogo)
@@ -22,9 +20,7 @@ public class JogadorEntity : Entity
         Sobrenome = sobrenome;
         DataNascimento = dataNascimento;
         Telefone = telefone;
-        Pais = pais;
-        Estado = estado;
-        Cidade = cidade;
+        IdCidade = idCidade;
         MaoDominante = maoDominante;
         Backhand = backhand;
         EstiloDeJogo = estiloDeJogo;
@@ -37,9 +33,7 @@ public class JogadorEntity : Entity
     public string Sobrenome { get; private set; }
     public DateTime DataNascimento { get; private set; }
     public string Telefone { get; private set; }
-    public string Pais { get; private set; }
-    public string Estado { get; private set; }
-    public string Cidade { get; private set; }
+    public int IdCidade { get; private set; }
     public string MaoDominante { get; private set; }
     public string Backhand { get; private set; }
     public string EstiloDeJogo { get; private set; }

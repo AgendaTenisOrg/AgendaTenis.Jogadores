@@ -56,7 +56,7 @@ public class CompletarPerfilHandler
 
     private async Task<List<Notificacao>> ValidarDados(CompletarPerfilCommand request)
     {
-        // Seria itneressante criar outras validações de dados aqui, mas não deu tempo de planejar e implementar...
+        // Seria ineressante criar outras validações de dados aqui, mas não deu tempo de planejar e implementar...
 
         var validacoes = new List<Notificacao>();
 
@@ -81,9 +81,7 @@ public class CompletarPerfilHandler
             request.Sobrenome,
             request.DataNascimento,
             request.Telefone,
-            request.Pais,
-            request.Estado,
-            request.Cidade,
+            request.IdCidade,
             request.MaoDominante,
             request.Backhand,
             request.EstiloDeJogo);

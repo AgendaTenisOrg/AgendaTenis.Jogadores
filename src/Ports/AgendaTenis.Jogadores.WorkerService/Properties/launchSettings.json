@@ -1,12 +1,15 @@
-﻿{
-  "$schema": "http://json.schemastore.org/launchsettings.json",
+{
   "profiles": {
     "AgendaTenis.Jogadores.WorkerService": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
       "environmentVariables": {
-        "DOTNET_ENVIRONMENT": "Development"
-      }
+        "DOTNET_ENVIRONMENT": "Container"
+      },
+      "dotnetRunMessages": true
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
     }
-  }
+  },
+  "$schema": "http://json.schemastore.org/launchsettings.json"
 }

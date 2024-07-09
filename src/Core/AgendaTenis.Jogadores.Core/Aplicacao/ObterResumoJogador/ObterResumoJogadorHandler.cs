@@ -1,5 +1,6 @@
 ﻿using AgendaTenis.Cache.Core;
 using AgendaTenis.Jogadores.Core.AcessoDados;
+using AgendaTenis.Jogadores.Core.Exceptions;
 using AgendaTenis.Jogadores.Core.Regras;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
@@ -20,7 +21,11 @@ public class ObterResumoJogadorHandler
     public async Task<ObterResumoJogadorResponse> Handle(ObterResumoJogadorCommand request, CancellationToken cancellationToken)
     {
         string recordId = $"_jogadores_resumo_{request.UsuarioId}";
-        var jogadorResumo = await _cache.GetRecordAsync<ObterResumoJogadorResponse>(recordId);
+
+        ObterResumoJogadorResponse jogadorResumo = null;
+
+        jogadorResumo = await _cache.GetRecordAsync<ObterResumoJogadorResponse>(recordId, lancarException: false);
+
 
         if (jogadorResumo is null)
         {
@@ -36,6 +41,9 @@ public class ObterResumoJogadorHandler
                 Pontuacao = p.PontuacaoAtual
             }).FirstOrDefaultAsync();
 
+            if (jogador is null)
+                throw new JogadorNaoEncontradoException();
+
             jogadorResumo = new ObterResumoJogadorResponse()
             {
                 Id = jogador.Id,
@@ -46,11 +54,16 @@ public class ObterResumoJogadorHandler
                 Categoria = jogador.Pontuacao.ObterCategoria()
             };
 
-            await _cache.SetRecordAsync(recordId, jogadorResumo, TimeSpan.FromMinutes(2));
+            await _cache.SetRecordAsync(recordId, jogadorResumo, TimeSpan.FromMinutes(2), lancarException: false);
         }
 
 
         return jogadorResumo;
+    }
+
+    private async Task<bool> ValidarPerfilCompleto(int id)
+    {
+        return await _jogadoresDbContext.Jogador.AsNoTracking().AnyAsync(c => c.UsuarioId == id);
     }
 
     private int CalcularIdade(DateTime dataNascimento)

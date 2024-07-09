@@ -22,14 +22,12 @@ public class JogadoresController : ControllerBase
 
     [HttpGet("Adversarios/Buscar")]
     [Authorize]
-    public async Task<IActionResult> BuscarAdversarios([FromServices] BuscarAdversariosHandler handler, string pais, string estado, string cidade, CategoriaEnum categoria)
+    public async Task<IActionResult> BuscarAdversarios([FromServices] BuscarAdversariosHandler handler, int idCidade, CategoriaEnum? categoria)
     {
         var request = new BuscarAdversariosCommand()
         {
             UsuarioId = int.Parse(User.Identity.Name),
-            Pais = pais,
-            Estado = estado,
-            Cidade = cidade,
+            IdCidade = idCidade,
             Categoria = categoria
         };
 

@@ -20,11 +20,9 @@ public class BuscarAdversariosHandler
 
         var adversarios = await _jogadoresDbContext.Jogador
             .AsNoTracking()
-            //.Where(c => c.UsuarioId != request.UsuarioId
-            //            && c.Pais == request.Pais
-            //            && c.Estado == request.Estado
-            //            && c.Cidade == request.Cidade
-            //            && (request.Categoria == null || c.PontuacaoAtual >= pontuacaoMinima && c.PontuacaoAtual <= pontuacaoMaxima))
+            .Where(c => c.UsuarioId != request.UsuarioId
+                        && c.IdCidade == request.IdCidade
+                        && (request.Categoria == null || c.PontuacaoAtual >= pontuacaoMinima && c.PontuacaoAtual <= pontuacaoMaxima))
             .Select(p => new AdversarioQueryModel()
             {
                 Id = p.Id,

@@ -15,12 +15,17 @@ namespace AgendaTenis.Jogadores.WorkerService
             var builder = Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((context, config) =>
                 {
+                    var env = context.HostingEnvironment.EnvironmentName;
                     config.SetBasePath(Directory.GetCurrentDirectory());
                     config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                    config.AddJsonFile($"appsettings.{env}.json", optional: true, reloadOnChange: true);
                     config.AddEnvironmentVariables();
                 })
                 .ConfigureServices((context, services) =>
                 {
+                    Console.WriteLine("Logging" + context.Configuration["Logging:LogLevel:Default"]);
+                    Console.WriteLine("Connection string" + context.Configuration.GetConnectionString("Jogadores"));
+
                     services.AddHostedService<PlacarConfirmadoWorker>();
 
                     services.AddScoped<AtualizarPontuacaoHandler>();

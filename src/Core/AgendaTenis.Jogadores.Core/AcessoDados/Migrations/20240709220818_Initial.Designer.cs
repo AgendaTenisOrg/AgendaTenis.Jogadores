@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AgendaTenis.Jogadores.Core.AcessoDados.Migrations
 {
     [DbContext(typeof(JogadoresDbContext))]
-    [Migration("20240706023414_Initial")]
+    [Migration("20240709220818_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -37,23 +37,18 @@ namespace AgendaTenis.Jogadores.Core.AcessoDados.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Cidade")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("DataNascimento")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Estado")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("EstiloDeJogo")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("IdCidade")
+                        .HasColumnType("integer");
 
                     b.Property<string>("MaoDominante")
                         .IsRequired()
@@ -63,10 +58,6 @@ namespace AgendaTenis.Jogadores.Core.AcessoDados.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(100)")
                         .HasColumnName("Nome");
-
-                    b.Property<string>("Pais")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<double>("PontuacaoAtual")
                         .HasColumnType("double precision");
