@@ -3,7 +3,7 @@
     "AgendaTenis.Jogadores.WorkerService": {
       "commandName": "Project",
       "environmentVariables": {
-        "DOTNET_ENVIRONMENT": "Container"
+        "DOTNET_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true
     },

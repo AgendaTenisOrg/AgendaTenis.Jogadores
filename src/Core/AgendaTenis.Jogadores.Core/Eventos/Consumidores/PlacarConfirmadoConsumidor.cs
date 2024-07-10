@@ -37,62 +37,65 @@ public class PlacarConfirmadoConsumidor : IEventConsumer
         {
             channel.ExchangeDeclare(exchange: EXCHANGENAME, type: ExchangeType.Fanout, durable: true, autoDelete: false);
             var queueArgs = new Dictionary<string, object>
-            {
-                { "x-max-delivery-attempts", 3 } // Define o máximo de 3 retentativas
-            };
+        {
+            { "x-max-delivery-attempts", 3 } // Define o máximo de 3 retentativas
+        };
             channel.QueueDeclare(queue: QUEUENAME, durable: true, exclusive: false, autoDelete: false, arguments: queueArgs);
             channel.QueueBind(queue: QUEUENAME, exchange: EXCHANGENAME, routingKey: string.Empty);
 
             var consumer = new EventingBasicConsumer(channel);
             consumer.Received += async (model, ea) =>
             {
-                using (var scope = _serviceScopeFactory.CreateScope())
+                try
                 {
-                    var body = ea.Body.ToArray();
-                    var message = Encoding.UTF8.GetString(body);
-
-                    // Se a mensagem não chegar no formato correto, então vamos rejeitar e nem devolver pra fila
-                    PlacarConfirmadoMensagem objetoDaMensagem;
-                    try
+                    using (var scope = _serviceScopeFactory.CreateScope())
                     {
-                        objetoDaMensagem = JsonSerializer.Deserialize<PlacarConfirmadoMensagem>(message);
-                    }
-                    catch (Exception)
-                    {
-                        channel.BasicReject(ea.DeliveryTag, false);
-                        throw;
-                    }
+                        var body = ea.Body.ToArray();
+                        var message = Encoding.UTF8.GetString(body);
 
-                    // Se der tudo certo, então vamos fazer o ack manual.
-                    // Se a chamada ao AtualizarPontuacaoCommand lançar alguma exception, então não vamos fazer o ack e vamos fazer o reque para tentar de novo
-                    try
-                    {
-                        var vencedorId = objetoDaMensagem.VencedorId;
-                        var perdedorId = objetoDaMensagem.DesafianteId == objetoDaMensagem.VencedorId ? objetoDaMensagem.AdversarioId : objetoDaMensagem.DesafianteId;
-
-                        var command = new AtualizarPontuacaoCommand()
+                        // Se a mensagem não chegar no formato correto, então vamos rejeitar e nem devolver pra fila
+                        PlacarConfirmadoMensagem objetoDaMensagem;
+                        try
                         {
-                            VencedorId = vencedorId,
-                            PerdedorId = perdedorId,
-                        };
+                            objetoDaMensagem = JsonSerializer.Deserialize<PlacarConfirmadoMensagem>(message);
+                        }
+                        catch (Exception)
+                        {
+                            channel.BasicReject(ea.DeliveryTag, false);
+                            throw;
+                        }
 
-                        await _atualizarPontuacaoHandler.Handle(command, new CancellationToken());
+                        // Se der tudo certo, então vamos fazer o ack manual.
+                        // Se a chamada ao AtualizarPontuacaoCommand lançar alguma exception, então não vamos fazer o ack e vamos fazer o reque para tentar de novo
+                        try
+                        {
+                            var vencedorId = objetoDaMensagem.VencedorId;
+                            var perdedorId = objetoDaMensagem.DesafianteId == objetoDaMensagem.VencedorId ? objetoDaMensagem.AdversarioId : objetoDaMensagem.DesafianteId;
 
-                        channel.BasicAck(ea.DeliveryTag, false);
+                            var command = new AtualizarPontuacaoCommand()
+                            {
+                                VencedorId = vencedorId,
+                                PerdedorId = perdedorId,
+                            };
+
+                            await _atualizarPontuacaoHandler.Handle(command, new CancellationToken());
+
+                            channel.BasicAck(ea.DeliveryTag, false);
+                        }
+                        catch (Exception ex)
+                        {
+                            channel.BasicNack(ea.DeliveryTag, false, true);
+                        }
                     }
-                    catch (Exception)
-                    {
-                        channel.BasicNack(ea.DeliveryTag, false, true);
-                        throw;
-                    }
-
-
                 }
+                catch (Exception)
+                {
+                    Console.WriteLine("Erro ao processar mensagem");
+                }
+                
             };
 
-            channel.BasicConsume(queue: QUEUENAME,
-                                 autoAck: false,
-                                 consumer: consumer);
+            channel.BasicConsume(queue: QUEUENAME, autoAck: false, consumer: consumer);
 
             while (!stoppingToken.IsCancellationRequested)
             {
@@ -100,4 +103,5 @@ public class PlacarConfirmadoConsumidor : IEventConsumer
             }
         }
     }
+
 }
