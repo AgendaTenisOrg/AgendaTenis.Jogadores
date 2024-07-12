@@ -18,28 +18,36 @@ public class BuscarAdversariosHandler
         var pontuacaoMinima = request.Categoria.GetValueOrDefault().ObterPontuacaoMinima();
         var pontuacaoMaxima = request.Categoria.GetValueOrDefault().ObterPontuacaoMaxima();
 
-        var adversarios = await _jogadoresDbContext.Jogador
+        var initialQuery = _jogadoresDbContext.Jogador
             .AsNoTracking()
             .Where(c => c.UsuarioId != request.UsuarioId
-                        && c.IdCidade == request.IdCidade
-                        && (request.Categoria == null || c.PontuacaoAtual >= pontuacaoMinima && c.PontuacaoAtual <= pontuacaoMaxima))
-            .Select(p => new AdversarioQueryModel()
-            {
-                Id = p.Id,
-                UsuarioId = p.UsuarioId,
-                NomeCompleto = $"{p.Nome} {p.Sobrenome}",
-                Pontuacao = p.PontuacaoAtual
-            }).ToListAsync();
+                        && (request.IdCidade == null || c.IdCidade == request.IdCidade)
+                        && (request.Categoria == null || c.PontuacaoAtual >= pontuacaoMinima && c.PontuacaoAtual <= pontuacaoMaxima));
+
+        var adversarios = await initialQuery
+                                .Skip((request.pagina - 1) * request.itensPorPagina)
+                                .Take(request.itensPorPagina)
+                                .Select(p => new AdversarioQueryModel()
+                                {
+                                    Id = p.Id,
+                                    UsuarioId = p.UsuarioId,
+                                    NomeCompleto = $"{p.Nome} {p.Sobrenome}",
+                                    Pontuacao = p.PontuacaoAtual
+                                })
+                                .ToListAsync();
+
+        var total = await initialQuery.CountAsync();
 
         var response = new BuscarAdversariosResponse()
         {
+            TotalDeItens = total,
             Adversarios = adversarios.Select(p => new BuscarAdversariosResponse.Adversario()
             {
                 Id = p.Id,
                 UsuarioId = p.UsuarioId,
                 NomeCompleto = p.NomeCompleto,
                 Pontuacao = p.Pontuacao,
-                Categoria = p.Pontuacao.ObterCategoria()
+                Categoria = new Enums.CategoriaEnumModel(p.Pontuacao.ObterCategoria())
             }).ToList()
         };
 

@@ -40,6 +40,17 @@ public class Startup
             options.Configuration = Configuration.GetConnectionString("Redis");
             options.InstanceName = "agendaTenis";
         });
+
+        services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAllOrigins",
+                builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+        });
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, JogadoresDbContext jogadoresDbContext)
@@ -57,6 +68,8 @@ public class Startup
         app.UseHttpsRedirection();
 
         app.UseRouting();
+
+        app.UseCors("AllowAllOrigins");
 
         app.UseAuthentication();
         app.UseAuthorization();
