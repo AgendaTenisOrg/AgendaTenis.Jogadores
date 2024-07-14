@@ -3,6 +3,7 @@ using AgendaTenis.Jogadores.Core.Aplicacao.AtualizarPontuacao;
 using AgendaTenis.Jogadores.Core.Aplicacao.BuscarAdversarios;
 using AgendaTenis.Jogadores.Core.Aplicacao.CompletarPerfil;
 using AgendaTenis.Jogadores.Core.Aplicacao.ObterResumoJogador;
+using AgendaTenis.Jogadores.Core.Aplicacao.VerificarPerfilCompleto;
 using AgendaTenis.Jogadores.WebApi.ConfiguracaoDeServicos;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,6 +35,7 @@ public class Startup
         services.AddScoped<BuscarAdversariosHandler>();
         services.AddScoped<ObterResumoJogadorHandler>();
         services.AddScoped<AtualizarPontuacaoHandler>();
+        services.AddScoped<VerificarPerfilCompletoHandler>();
 
         services.AddStackExchangeRedisCache(options =>
         {

@@ -1,6 +1,7 @@
 ﻿using AgendaTenis.Jogadores.Core.Aplicacao.BuscarAdversarios;
 using AgendaTenis.Jogadores.Core.Aplicacao.CompletarPerfil;
 using AgendaTenis.Jogadores.Core.Aplicacao.ObterResumoJogador;
+using AgendaTenis.Jogadores.Core.Aplicacao.VerificarPerfilCompleto;
 using AgendaTenis.Jogadores.Core.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -42,6 +43,15 @@ public class JogadoresController : ControllerBase
     public async Task<IActionResult> ObterResumoJogador([FromServices] ObterResumoJogadorHandler handler)
     {
         var request = new ObterResumoJogadorCommand() { UsuarioId = int.Parse(User.Identity.Name) };
+        var response = await handler.Handle(request, new CancellationToken());
+        return Ok(response);
+    }
+
+    [HttpGet("Perfil/Completo")]
+    [Authorize]
+    public async Task<IActionResult> VerificarPerfilCompleto([FromServices] VerificarPerfilCompletoHandler handler)
+    {
+        var request = new VerificarPerfilCompletoCommand() { UsuarioId = int.Parse(User.Identity.Name) };
         var response = await handler.Handle(request, new CancellationToken());
         return Ok(response);
     }
